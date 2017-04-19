@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Week 4 Star Wars Game</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	
+	  <!-- Added link to the jQuery Library -->
+  <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+
+</head>
+<body>
+
+<!-- player has
+planning 
+
+- Health Points
+- Attack Power
+- Base Attack Power
+- Counter Attack Power
+
+
+choose a character for player
+choose an opponent
+move oppenent to defender area
+click attack button to attack
+- reduce oppenent health points (show below character)
+- increase player attack power
+- opponent attacks back
+- reduce player health points (show below character)
+game status:
+if opponent health points are zero:
+- remove opponent
+- let user select new oppenent
+if player looses health points:
+- they lose
+- restart game
+if all opponents are defeated player wins
+ -->
+
+<!-- game html starts here -->
+<!-- start container -->
+	<div class="container">
+
+		<!-- first row -->
+
+		<div class="row">
+			 <div class="col-lg-12">
+				<!-- Add jumbotron -->
+				<div class="jumbotron">
+				  <h1> Star Wars RPG game </h1>
+				  <p> select a character to begin...</p>
+				  
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Player character-->
+
+		<div class="row">
+			 <div class="col-lg-12">
+			 	<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Your Character</h3>
+				  </div>
+				  <div class="panel-body">
+				  	<span id="player"></span>
+				  </div>
+				</div>
+
+			 </div>
+		</div>	
+
+		<!-- Enemies to attack-->
+
+		<div class="row">
+			 <div class="col-lg-12">
+			 	<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Enemies Available to Attack</h3>
+				  </div>
+				  <div class="panel-body">
+				  	<span id="enemy"></span>
+				  </div>
+				</div>
+
+			 </div>
+		</div>	
+
+		<!-- Fight Section-->
+
+		<div class="row">
+			 <div class="col-lg-12">
+			 	<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Fight Section</h3>
+				  </div>
+				  <div class="panel-body">
+				  	<!-- Indicates a dangerous or potentially negative action -->
+					<button type="button" class="btn btn-danger attack">Attack</button>
+				  </div>
+				</div>
+
+			 </div>
+		</div>	
+
+		<!-- Defender section-->
+
+		<div class="row">
+			 <div class="col-lg-12">
+			 	<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Defender</h3>
+				  </div>
+				  <div class="panel-body">
+				  	<span id="defender"></span>
+				  </div>
+				</div>
+
+			 </div>
+		</div>	
+
+		 <!-- Wins -->
+		 <div class="row">
+			 <div class="col-lg-12">
+				<div class="panel panel-default">
+				  <div class="panel-body">
+				    <strong>Wins: </strong><span id="wins">0</span>
+				  </div>
+				</div>
+			 </div>
+		</div>	
+
+		<!-- Losses -->
+		 <div class="row">
+			 <div class="col-lg-12">
+			 	<div class="panel panel-default">
+				  <div class="panel-body">
+				    <strong>Losses: </strong><span id="losses">0</span>
+				  </div>
+				</div>
+
+			 </div>
+		</div>	
+
+	</div>
+
+<!-- link to javascript -->
+<script type="text/javascript" src="javascript/game.js"></script>
+
+</ul>
+</body>
+</html>
