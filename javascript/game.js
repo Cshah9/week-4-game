@@ -19,9 +19,14 @@ $(document).ready(function(){
 	console.log("Document Ready function");
 	//setupGame();
 
+});
+
+	// $(".enemy").click(function(){
+	//  	alert("enemy clicked");
+	//  });
+
 	 $(".character").click(function(){
 		console.log("character on click");
-		console.log();
 
 
 	 	if (!playerSelected){
@@ -40,13 +45,13 @@ $(document).ready(function(){
 
 	 				//remove from charactes section
 	 				console.log("removing: " + charClass);
-	 				$newEnemy.remove();
+	 				$newEnemy.detach();
 	 				// remove character class
-	 				$newEnemy.removeClass("character");
+//	 				$newEnemy.removeClass("character");
 
 	 				// add enemy class and formating;
 	 				$newEnemy.addClass("enemy");
-
+	
 	 				//add to enemies section
 	 				$("#enemy").append($newEnemy);
 	 			}
@@ -58,6 +63,24 @@ $(document).ready(function(){
 
 	 	}
 
+	 	else if ($(this).hasClass("enemy")) {
+	 		//create a reference to the enemy
+	 		$enemy = $(this);
+			console.log("enemy detected! : " + $enemy.attr("data-name"));
+			
+			// remove it from enemies area
+			$enemy.detach();
+
+			//add enemy to defender's area
+			$("#defender").append($enemy);
+
+			//set boolean to true to allow attackl
+			enemySelected = true;
+
+
+
+	 	}
+
 	 });
 
 	 $(".attack").click(function(){
@@ -66,7 +89,13 @@ $(document).ready(function(){
 	  	}
 	  	else {
 	  		if(!playerSelected && !enemySelected) alert("need to select a player and enemy!");
-	  		else if( playerSelected && !enemySelected) alert("need to select an enemy!");
+	  		else if( playerSelected && !enemySelected) {
+	  			alert("need to select an enemy!");
+	  			console.log("player: " + $player.attr("data-name"));
+	  		
+	  		}
+
+
 	  		else if( !playerSelected && enemySelected) alert("something's wrong....");
 	  		else {
 	  			//we're all good to attack...
@@ -75,11 +104,7 @@ $(document).ready(function(){
 	  	}
 	 });
 
-	 // $(".enemy").click(function(){
-	 // 	alert("enemy clicked");
-	 // });
 
-});
 
 
 
