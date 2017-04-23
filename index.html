@@ -3,8 +3,15 @@
 <head>
 	<title>Week 4 Star Wars Game</title>
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Style sheets: -->
+		<!-- Reset -->
+		<link rel="stylesheet" type="text/css" href="./css/reset.css">
+
+		<!-- Bootstrap: Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- My CSS -->
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
 	
 	  <!-- Added link to the jQuery Library -->
   <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
@@ -41,6 +48,7 @@ if all opponents are defeated player wins
 
 <!-- game html starts here -->
 <!-- start container -->
+
 	<div class="container">
 
 		<!-- first row -->
@@ -48,7 +56,7 @@ if all opponents are defeated player wins
 		<div class="row">
 			 <div class="col-lg-12">
 				<!-- Add jumbotron -->
-				<div class="jumbotron">
+				<div class="jumbotron header">
 				  <h1> Star Wars RPG game </h1>
 				  <p> select a character to begin...</p>
 				  
@@ -66,6 +74,41 @@ if all opponents are defeated player wins
 				    <h3 class="panel-title">Your Character</h3>
 				  </div>
 				  <div class="panel-body">
+				  	<div class="col-lg-2 col-md-2 col-sm-6 finn character" data-name="finn">
+				  		<span class="name">Finn</span>
+				  		<br>
+						<img src="images/finn.png">
+						<br>
+						<span class="healthpoints">100</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-6 rey character" data-name="rey">
+						<span class="name">Rey</span>
+				  		<br>
+				  		<img src="images/rey.png">
+						<br>
+						<span class="healthpoints">100</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-6 poe character" data-name="poe">
+						<span class="name">Poe</span>
+				  		<br>
+				  		<img src="images/poe.png">
+						<br>
+						<span class="healthpoints">100</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-6 kylo character" data-name="kylo">
+						<span class="name">Kylo Ren</span>
+				  		<br>
+				  		<img src="images/kylo.png">
+						<br>
+						<span class="healthpoints">100</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-6 bb8 character" data-name="bb8">
+						<span class="name">BB-8</span>
+				  		<br>
+				  		<img src="images/bb8.png">
+						<br>
+						<span class="healthpoints">100</span>
+					</div>
 				  	<span id="player"></span>
 				  </div>
 				</div>
@@ -99,7 +142,7 @@ if all opponents are defeated player wins
 				  </div>
 				  <div class="panel-body">
 				  	<!-- Indicates a dangerous or potentially negative action -->
-					<button type="button" class="btn btn-danger attack">Attack</button>
+					<button type="button" class="attack btn btn-danger attack">Attack</button>
 				  </div>
 				</div>
 

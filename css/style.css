@@ -1,0 +1,21 @@
+img {
+	height: 200px;
+	width: 100px
+}
+
+.character {
+	text-align: center;
+	font-size: 30px;
+}
+
+.player {
+	text-align: center;
+	font-size: 30px;
+	color: limegreen;
+}
+
+.enemy {
+	text-align: center;
+	font-size: 30px;
+	color: red;
+}
