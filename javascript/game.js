@@ -181,8 +181,15 @@ $(document).ready(function(){
 
 function attack(){
 	console.log("attack function");
+	console.log("player is: ");
+	console.log($player.attr("data-name"));
 
-//	$enemy.healthpoints -= healthoints;
+	console.log("enemy is: ");
+	console.log($enemy.attr("data-name"));
+
+
+
+// alert("enemy healthPoints: " + $enemy.healthpoints);
 	
 }
 
