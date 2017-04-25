@@ -9,8 +9,8 @@ var enemyHandles = [];
 var enemyHandle;
 var currentEnemy;
 var currentPlayer;
-var losses;
-var wins;
+var losses=0;
+var wins=0;
 
 var characters = [
 	// Player: Rey
@@ -33,13 +33,13 @@ var characters = [
 		name:"Kylo Ren",
 		shortName:"Kylo",
 		// - Health Points
-		healthPoints: 50,
+		healthPoints: 100,
 		// - Attack Power
 		attackPower: 5, 
 		// - Base Attack Power
 		baseAttackPower: 5,
 		// - Counter Attack Power
-		counterAttackPower: 1,
+		counterAttackPower: 10,
 		//image url
 		image: "images/kylo.png"
 	},
@@ -78,13 +78,13 @@ var characters = [
 		name:"BB-8",
 		shortName:"BB8",
 		// - Health Points
-		healthPoints: 50,
+		healthPoints: 100,
 		// - Attack Power
 		attackPower: 5, 
 		// - Base Attack Power
 		baseAttackPower: 5,
 		// - Counter Attack Power
-		counterAttackPower: 1,
+		counterAttackPower: 10,
 		//image url
 		image: "images/bb8.png"
 	}
@@ -236,8 +236,8 @@ function attack(){
 	if(currentPlayer.healthPoints==0) {
 		//player losses
 		alert("you lose!");
-		//losses ++;
-		//resetGame();
+		losses++;
+		resetGame();
 
 	}
 
@@ -249,6 +249,7 @@ function attack(){
 		$("#defender").html("");
 		enemySelected = false;
 		$defeatedEnemies.push($enemy);
+		// $enemy.removeClass("enemy");
 		//remove handle
 		enemyHandles.splice(enemyHandles.indexOf(enemyHandle), 1);
 
@@ -257,8 +258,8 @@ function attack(){
 		//check if all enemies gone - then user wins
 		if(enemyHandles.length == 0) {
 			alert("you win!");
-			//wins++;
-			//reset
+			wins++;
+			resetGame();
 
 		}
 			else {
@@ -277,9 +278,26 @@ function resetGame(){
 	alert("do reset function");
 	//update wins and losses
 
+	$("#wins").html(wins);
+	$("#losses").html(losses);
 
-//reset characters
-characters=	[
+// //reset characters
+	//$player.removeClass("player");
+	//  ?? $enemy.removeClass("enemy");
+	// $("#all-characters").append($player);
+	// console.log($player);
+	// console.log("$defeatedEnemies.length " + $defeatedEnemies.length)
+	// for(var e = 0; e<$defeatedEnemies.length; e++) {
+	// 	console.log($defeatedEnemies[e]);
+	// 	$("#all-characters").append($defeatedEnemies[e]);
+
+	// }
+
+characters =	[
+
+
+
+
 	// Player: Rey
 	{
 		name:"Rey",
@@ -357,10 +375,25 @@ characters=	[
 	}
 	];
 
-	//replace character html
-	//$(".all-characters").html('');
+	// //replace character html
+	$(".all-characters").html('<div class="col-lg-2 col-md-2 col-sm-6 finn character" data-name="finn"><span class="name">Finn</span><br><img src="images/finn.png"><br><span class="healthpoints">100</span></div><div class="col-lg-2 col-md-2 col-sm-6 rey character" data-name="rey"><span class="name">Rey</span><br><img src="images/rey.png"><br><span class="healthpoints">100</span></div><div class="col-lg-2 col-md-2 col-sm-6 poe character" data-name="poe"><span class="name">Poe</span><br><img src="images/poe.png"><br><span class="healthpoints">100</span></div><div class="col-lg-2 col-md-2 col-sm-6 kylo character" data-name="kylo"><span class="name">Kylo Ren</span><br><img src="images/kylo.png"><br><span class="healthpoints">50</span></div><div class="col-lg-2 col-md-2 col-sm-6 bb8 character" data-name="bb8"><span class="name">BB-8</span><br><img src="images/bb8.png"><br><span class="healthpoints">50</span></div><span id="player"></span>');
+	$("#defender").html("");
+	$("#enemy").html("");
 
-	//set all vars to initial values;
+
+	// //set all vars to initial values;
+	 playerSelected = false;
+	 enemySelected = false;
+	 playerHandle = "";
+	 $player = "";
+	 $enemy = "";
+	 $defeatedEnemies = [];
+	 characterHandles = ["finn", "rey", "poe", "kylo", "bb8"];
+	 enemyHandles = [];
+	 enemyHandle = "";
+	 currentEnemy = "";
+	 currentPlayer = "";
+
 }
 
 
