@@ -3,13 +3,18 @@ var enemySelected = false;
 var playerHandle;
 var $player;
 var $enemy;
+var $defeatedEnemies = [];
 var characterHandles = ["finn", "rey", "poe", "kylo", "bb8"];
 var enemyHandles = [];
 var enemyHandle;
 var currentEnemy;
+var currentPlayer;
+var losses;
+var wins;
 
+var characters = [
 	// Player: Rey
-	var rey = {
+	{
 		name:"Rey",
 		shortName:"Rey",
 		// - Health Points
@@ -22,24 +27,24 @@ var currentEnemy;
 		counterAttackPower: 10,
 		//image url
 		image: "images/rey.png"
-	}
+	},
 	// Player: Kylo
-	var kylo = {
+	{
 		name:"Kylo Ren",
 		shortName:"Kylo",
 		// - Health Points
-		healthPoints: 100,
+		healthPoints: 50,
 		// - Attack Power
 		attackPower: 5, 
 		// - Base Attack Power
 		baseAttackPower: 5,
 		// - Counter Attack Power
-		counterAttackPower: 10,
+		counterAttackPower: 1,
 		//image url
 		image: "images/kylo.png"
-	}
+	},
 	// Player: Finn
-	var rey = {
+	{
 		name:"Finn",
 		shortName:"Finn",
 		// - Health Points
@@ -52,9 +57,9 @@ var currentEnemy;
 		counterAttackPower: 10,
 		//image url
 		image: "images/Finn.png"
-	}
+	},
 	// Player: Poe
-	var kylo = {
+	{
 		name:"Poe Dameron",
 		shortName:"Poe",
 		// - Health Points
@@ -67,25 +72,25 @@ var currentEnemy;
 		counterAttackPower: 10,
 		//image url
 		image: "images/poe.png"
-	}
+	},
 		// Player: BB8
-	var rey = {
+	{
 		name:"BB-8",
 		shortName:"BB8",
 		// - Health Points
-		healthPoints: 100,
+		healthPoints: 50,
 		// - Attack Power
 		attackPower: 5, 
 		// - Base Attack Power
 		baseAttackPower: 5,
 		// - Counter Attack Power
-		counterAttackPower: 10,
+		counterAttackPower: 1,
 		//image url
 		image: "images/bb8.png"
 	}
+	];
 
 
-var characters = [];
 
 $(document).ready(function(){
 
@@ -94,6 +99,13 @@ $(document).ready(function(){
 
 });
 
+//uses character short Name to find and return the character object from characters array
+function getCharacter(sName){
+
+	console.log("getCharacter - " + sName);
+	//console.log(characters.find(function(c){return c.shortName.toLowerCase()===sName}));
+	return characters.find(function(c){return c.shortName.toLowerCase()===sName});
+};
 	// $(".enemy").click(function(){
 	//  	alert("enemy clicked");
 	//  });
@@ -109,13 +121,17 @@ $(document).ready(function(){
 	 		playerHandle = $player.attr("data-name");
 	 		//update character with player style
 	 		$player.addClass("player");
+	 		//set player object
+	 		currentPlayer = getCharacter(playerHandle);
+
 
 
 	 		//update enemies and move them
 	 		for(var i =0; i<characterHandles.length; i ++ ){
 	 			if(characterHandles[i] !== playerHandle){
 	 				var charClass = "." + characterHandles[i];
-	 				enemyHandles.push(charClass);
+	 				// enemyHandles.push(charClass);
+	 				enemyHandles.push(characterHandles[i])
 	 				var $newEnemy = $(charClass);
 
 	 				//remove from charactes section
@@ -132,7 +148,7 @@ $(document).ready(function(){
 	 			}
 
 	 		}
-
+	 		console.log(enemyHandles.toString());
 	 		//set playerSelected flag
 	 		playerSelected = true;
 
@@ -146,6 +162,8 @@ $(document).ready(function(){
 	 		//store enemy name...
 	 		enemyHandle = $enemy.attr("data-name");
 			console.log("enemy detected! : " + enemyHandle);
+			//store reference to enemy
+			currentEnemy = getCharacter(enemyHandle);
 			
 			// remove it from enemies area
 			$enemy.detach();
@@ -186,12 +204,168 @@ function attack(){
 
 	console.log("enemy is: ");
 	console.log($enemy.attr("data-name"));
+	console.log(currentPlayer.name + " vs " + currentEnemy.name);
 
+		// 	healthPoints: 100,
+		// // - Attack Power
+		// attackPower: 5, 
+		// // - Base Attack Power
+		// baseAttackPower: 5,
+		// // - Counter Attack Power
+		// counterAttackPower: 10,
 
+	//player attacks enemy; enemy HP reduced
+	currentEnemy.healthPoints -= currentPlayer.attackPower;
+	//player increase attach power by base attach power
+	currentPlayer.attackPower+= currentPlayer.baseAttackPower;
+	//enemy counter attacks: player HP reduced
+	currentPlayer.healthPoints -= currentEnemy.counterAttackPower;
 
-// alert("enemy healthPoints: " + $enemy.healthpoints);
+	console.log (currentPlayer);
+	console.log (currentEnemy);
+
+	//don't print display negative HPs
+	if(currentPlayer.healthPoints<0) currentPlayer.healthPoints = 0;
+	if(currentEnemy.healthPoints<0) currentEnemy.healthPoints = 0;
+
+	//update character HPs:
+	$player.children($(".healthPoints")).html(currentPlayer.healthPoints);
+	$enemy.children($(".healthPoints")).html(currentEnemy.healthPoints);
+
+	//check HPs and 
+	if(currentPlayer.healthPoints==0) {
+		//player losses
+		alert("you lose!");
+		//losses ++;
+		//resetGame();
+
+	}
+
+	else if(currentEnemy.healthPoints == 0 ) {
+		//enemy defeated
+		alert("enemy defeated");
+
+		//remove from screen
+		$("#defender").html("");
+		enemySelected = false;
+		$defeatedEnemies.push($enemy);
+		//remove handle
+		enemyHandles.splice(enemyHandles.indexOf(enemyHandle), 1);
+
+		console.log(enemyHandles.toString());
+
+		//check if all enemies gone - then user wins
+		if(enemyHandles.length == 0) {
+			alert("you win!");
+			//wins++;
+			//reset
+
+		}
+			else {
+			//if not, alert player to select a new enemy
+			alert("choose a new enemy!");
+		}
+	}
+
 	
+	
+
 }
+
+//resets the game after a win/loss
+function resetGame(){
+	alert("do reset function");
+	//update wins and losses
+
+
+//reset characters
+characters=	[
+	// Player: Rey
+	{
+		name:"Rey",
+		shortName:"Rey",
+		// - Health Points
+		healthPoints: 100,
+		// - Attack Power
+		attackPower: 5, 
+		// - Base Attack Power
+		baseAttackPower: 5,
+		// - Counter Attack Power
+		counterAttackPower: 10,
+		//image url
+		image: "images/rey.png"
+	},
+	// Player: Kylo
+	{
+		name:"Kylo Ren",
+		shortName:"Kylo",
+		// - Health Points
+		healthPoints: 100,
+		// - Attack Power
+		attackPower: 5, 
+		// - Base Attack Power
+		baseAttackPower: 5,
+		// - Counter Attack Power
+		counterAttackPower: 10,
+		//image url
+		image: "images/kylo.png"
+	},
+	// Player: Finn
+	{
+		name:"Finn",
+		shortName:"Finn",
+		// - Health Points
+		healthPoints: 100,
+		// - Attack Power
+		attackPower: 5, 
+		// - Base Attack Power
+		baseAttackPower: 5,
+		// - Counter Attack Power
+		counterAttackPower: 10,
+		//image url
+		image: "images/Finn.png"
+	},
+	// Player: Poe
+	{
+		name:"Poe Dameron",
+		shortName:"Poe",
+		// - Health Points
+		healthPoints: 100,
+		// - Attack Power
+		attackPower: 5, 
+		// - Base Attack Power
+		baseAttackPower: 5,
+		// - Counter Attack Power
+		counterAttackPower: 10,
+		//image url
+		image: "images/poe.png"
+	},
+		// Player: BB8
+	{
+		name:"BB-8",
+		shortName:"BB8",
+		// - Health Points
+		healthPoints: 100,
+		// - Attack Power
+		attackPower: 5, 
+		// - Base Attack Power
+		baseAttackPower: 5,
+		// - Counter Attack Power
+		counterAttackPower: 10,
+		//image url
+		image: "images/bb8.png"
+	}
+	];
+
+	//replace character html
+	//$(".all-characters").html('');
+
+	//set all vars to initial values;
+}
+
+
+
+
 
 
 

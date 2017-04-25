@@ -1,0 +1,68 @@
+Notes:
+
+js:
+function setupGame() {
+
+	// Player: Rey
+	var rey = {
+		name:"Rey",
+		shortName:"Rey",
+		// - Health Points
+		healthPoints: 100,
+		// - Attack Power
+		attackPower: 6, 
+		// - Base Attack Power
+		baseAttackPower: 6,
+		// - Counter Attack Power
+		counterAttackPower: 10,
+		//image url
+		image: "images/rey.png"
+	}
+	// Player: Kylo
+	var kylo = {
+		name:"Kylo Ren",
+		shortName:"Kylo",
+		// - Health Points
+		healthPoints: 100,
+		// - Attack Power
+		attackPower: 5, 
+		// - Base Attack Power
+		baseAttackPower: 5,
+		// - Counter Attack Power
+		counterAttackPower: 10,
+		//image url
+		image: "images/kylo.png"
+	}
+
+	var characters = [rey, kylo];
+	//handle to players section
+	var $player = $('#player');
+
+
+for (var i = 0; i < characters.length; i ++) {
+
+	// build div for each character
+		$character = $("<div>");
+		//add short name and character as class
+		$character.addClass(characters[i].shortName+ " character");
+		// append attributes and pic
+		$character.append(characters[i].name);
+		$character.append("<br>");
+		$character.append(characters[i].healthPoints);
+		$character.append("<br>");
+		$character.append("<img src='"+characters[i].image+"'/>");
+		$player.append($character);
+	}
+}
+
+	 		$player.remove();
+
+	 		
+	$(".enemy").click(function(){
+	//when enemy is selected, remove from avaliable enemy list and add to Defeender area
+	// $enemy = $(this);
+	// currentEnemy = $enemy.attr("data-name");
+	// alert(currentEnemy);;
+	alert("Enemy clicked");
+
+	});
